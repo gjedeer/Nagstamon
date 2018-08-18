@@ -213,6 +213,7 @@ class Config(object):
         self.notify_if_unknown = True
         self.notify_if_unreachable = True
         self.notify_if_down = True
+        self.disable_dbus = False
         # Regular expression filters
         self.re_host_enabled = False
         self.re_host_pattern = ''

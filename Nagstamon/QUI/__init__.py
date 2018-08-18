@@ -102,16 +102,19 @@ if not OS in NON_LINUX:
     from Nagstamon.thirdparty.ewmh import EWMH
 
     # DBus only interesting for Linux too
-    try:
-        from dbus import (Interface,
-                          SessionBus)
-        from dbus.mainloop.pyqt5 import DBusQtMainLoop
-        # flag to check later if DBus is available
-        DBUS_AVAILABLE = True
-
-    except ImportError:
-        print('No DBus for desktop notification available.')
+    if conf.disable_dbus:
         DBUS_AVAILABLE = False
+    else:
+        try:
+            from dbus import (Interface,
+                            SessionBus)
+            from dbus.mainloop.pyqt5 import DBusQtMainLoop
+            # flag to check later if DBus is available
+            DBUS_AVAILABLE = True
+
+        except ImportError:
+            print('No DBus for desktop notification available.')
+            DBUS_AVAILABLE = False
 
 # fixed shortened and lowered color names for cells, also used by statusbar label snippets
 COLORS = OrderedDict([('DOWN', 'color_down_'),
